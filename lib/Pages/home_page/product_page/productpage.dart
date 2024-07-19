@@ -1,5 +1,9 @@
 import 'package:cocktailapp/Models/cocktails.dart';
+import 'package:cocktailapp/Providers/cocktails_provider.dart';
+import 'package:cocktailapp/Providers/favorites_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CocktailPage extends StatefulWidget {
   Cocktail data;
@@ -54,17 +58,27 @@ class _CocktailPageState extends State<CocktailPage> {
                 Positioned(
                   top: 20,
                   right: 20,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    child: const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Icon(
-                        Icons.favorite_border_outlined,
-                        size: 20,
-                        color: Colors.white,
+                  child: GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: GestureDetector(
+                          onTap: () {
+                            Provider.of<FavoritesProvider>(context,
+                                    listen: false)
+                                .saveFavorites(widget.data.idDrink);
+                          },
+                          child: Icon(
+                            Icons.favorite_border_outlined,
+                            size: 20,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
                     ),
                   ),

@@ -1,5 +1,7 @@
 import 'package:cocktailapp/Pages/home_page/homepage.dart';
 import 'package:cocktailapp/Providers/cocktails_provider.dart';
+import 'package:cocktailapp/Providers/favorites_provider.dart';
+import 'package:cocktailapp/Widgets/bottom_navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -15,10 +17,11 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => CocktailProvider()),
+        ChangeNotifierProvider(create: (_) => FavoritesProvider()),
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: MainPage(),
+        home: BottomNavBar(),
       ),
     );
   }
